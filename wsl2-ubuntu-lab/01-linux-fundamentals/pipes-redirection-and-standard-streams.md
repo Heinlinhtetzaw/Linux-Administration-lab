@@ -529,7 +529,7 @@ I ran the following command to save the same report:
 ps -eo pid,user,comm,%cpu,%mem --sort=-%mem | head -n 11 > streams-and-redirection-lab/top-memory-processes.txt
 ```
 
-I did not separately display the saved file, so its contents were not verified in the transcript.
+The saved file's contents remain unverified.
 
 ### System Warning Investigation
 
@@ -549,7 +549,7 @@ sudo journalctl -b -p warning --no-pager | tail -n 20 > streams-and-redirection-
 
 ## 11. Verification Results
 
-I completed and captured evidence for the following tasks:
+I practiced the following tasks:
 
 - I inspected my shell file descriptors and confirmed that descriptors `0`, `1`, and `2` pointed to `/dev/pts/0`.
 - I created my streams-and-redirection lab and copied the simulated practice files into it.
@@ -581,7 +581,7 @@ I entered `ehco` instead of `echo`. Because I redirected standard error to `repo
 
 ### Incomplete Health-Report Sections
 
-My command group ran `free -h` after the `=== DISK USAGE ===` heading and did not run `df -h`. This means the recorded health report did not follow the planned memory-usage and disk-usage section layout. I also did not capture the report content after the command ran, so I should correct the headings and rerun the report before treating it as a complete health report.
+My command group ran `free -h` after the `=== DISK USAGE ===` heading and did not run `df -h`. The report therefore needs corrected headings and a new run before it can serve as a complete health report.
 
 ### Incorrect Here-Document Delimiter Placement
 

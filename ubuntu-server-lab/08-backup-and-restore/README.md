@@ -173,5 +173,4 @@ Recovery point objective (RPO) describes the maximum acceptable data loss measur
 ## 8. References
 
 - Local manual pages: `man tar`, `man rsync`, `man sha256sum`, `man diff`, `man findmnt`, and `man df`.
-- My exercise specification and recorded terminal output.
 

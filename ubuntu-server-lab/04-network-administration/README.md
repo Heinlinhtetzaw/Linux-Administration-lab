@@ -60,7 +60,7 @@ network:
                      Address: 10.0.2.15 (DHCP4 via 10.0.2.2)
 ```
 
-The status also showed `systemd-networkd` messages for the interface. I accidentally checked `systemd-network` rather than `systemd-networkd` with `systemctl is-active`; that result does not establish the actual networkd service state. The `networkctl` output provides evidence that networkd was managing the interface, while a correctly named direct service check remains uncaptured.
+The status showed `systemd-networkd` messages for the interface. I mistakenly checked `systemd-network` rather than `systemd-networkd` with `systemctl is-active`. `networkctl` showed networkd managing the interface, but a correctly named direct service check remains unverified.
 
 ### DHCP and Static IP Configuration Concepts
 
@@ -154,4 +154,3 @@ I learned to connect Netplan's DHCP setting with the interface and route actuall
 ## 10. References
 
 - Local manual pages: `man ip`, `man netplan`, `man networkctl`, `man resolvectl`, and `man ss`.
-- My exercise specification and recorded terminal output.

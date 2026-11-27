@@ -169,7 +169,7 @@ Maximum number of days between password change          : 99999
 Number of days of warning before password expires       : 7
 ```
 
-This indicates that Alice must change her password at the next applicable login. The transcript does not show a subsequent login or password change.
+Alice must change her password at the next applicable login. A subsequent login and password change remain unverified.
 
 ### Account Locking and Unlocking
 
@@ -230,4 +230,3 @@ I learned to check accounts and groups before changing them, distinguish primary
 ## 10. References
 
 - Local manual pages: `man useradd`, `man usermod`, `man userdel`, `man groupadd`, `man groupdel`, `man passwd`, `man chage`, `man id`, and `man 5 passwd`.
-- My exercise specification and recorded terminal output.

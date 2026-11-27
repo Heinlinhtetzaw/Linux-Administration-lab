@@ -20,7 +20,7 @@ My installation notes record the following setup:
 | Storage | LVM |
 | Interface | Command-line interface |
 
-My existing [environment shttps://chatgpt.com/share/6b07b403-0a2c-83ec-8c16-78a05c380ac1etup notes](../environment-setup.md) record the installed system as Ubuntu 24.04.5 LTS. The installation-image version and the installed system version describe different points in time; the supplied notes do not show when or how the version changed.
+My [environment setup notes](../environment-setup.md) list the installed system as Ubuntu 24.04.5 LTS. The installation-image version and installed system version differ; when or how the version changed is unknown.
 
 ## 3. Installation Media Preparation
 

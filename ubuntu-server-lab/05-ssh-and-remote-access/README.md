@@ -79,7 +79,7 @@ From a second PowerShell window, I connected using the dedicated key:
 ssh -i "$env:USERPROFILE\.ssh\ubuntu_server_lab" -p 2222 jane@127.0.0.1
 ```
 
-The client prompted for the key's passphrase and displayed the Ubuntu login banner. My SSH journal recorded an accepted Ed25519 public-key login at the same time; its fingerprint matched the one printed when the Windows key was generated. This supports successful public-key authentication with that key. The transcript does not show the additional explicit no-password-fallback test requested by the exercise.
+The client prompted for the key's passphrase and displayed the Ubuntu login banner. The SSH journal recorded an accepted Ed25519 public-key login with a fingerprint matching the Windows key. An explicit test with password fallback disabled remains unverified.
 
 ### Secure File Transfer Using SCP
 
@@ -102,24 +102,24 @@ Secure file transfer verigication
 
 I inspected `journalctl -u ssh`, searched `/var/log/auth.log` for accepted public-key and password logins, checked sessions with `w`, and displayed `SSH_CONNECTION`. The log contained actual `Accepted publickey` entries as well as an earlier `Accepted password` entry. It also recorded the sudo commands used to search the log; those search-command entries are not themselves authentication events.
 
-I omitted the key fingerprints and detailed session records from this public summary. The captured login banner and matching fingerprint provide the evidence for the key-based login described above.
+Key fingerprints and detailed session records are omitted from this public summary.
 
 ## 6. Verification Results
 
 | Exercise | Result |
 |---|---|
 | SSH service | Reported active and enabled; port 22 had IPv4 and IPv6 listeners. |
-| Server configuration | Selected effective settings were displayed; `sshd -t` produced no output, but its exit status was not captured. |
+| Server configuration | Selected effective settings were displayed; `sshd -t` produced no output, but its exit status remains unverified. |
 | Key-based login | Windows key generation, login banner, and a matching accepted public-key journal entry support a successful login. |
-| Explicit key-only test | The requested `IdentitiesOnly` and `PreferredAuthentications` command was not shown. |
-| File transfer | The server-side file and content were shown; upload and download with `scp` were not captured. |
+| Explicit key-only test | A test using `IdentitiesOnly` and `PreferredAuthentications` remains unverified. |
+| File transfer | The server-side file and content were present; `scp` upload and download remain unverified. |
 | Authentication logs | Both public-key and password login events were observed. |
 
 ## 7. Errors and Troubleshooting
 
 ### Incorrect SSH Key Generation Environment
 
-I accidentally ran a PowerShell command in the remote Ubuntu Bash session. Bash interpreted the PowerShell-specific environment variable syntax differently, creating a key pair with an unintended filename on the server. My transcript shows an interactive removal command for that pair and then a new key generation in Windows PowerShell. I did not separately list the server files after removal to verify their absence.
+I accidentally ran a PowerShell command in the remote Ubuntu Bash session. Bash interpreted the PowerShell environment variable syntax differently and created a key pair with an unintended filename on the server. I issued an interactive removal command and generated a new key in Windows PowerShell. I did not verify that the server files were removed.
 
 I learned to check whether I am in the local client shell or the remote server shell before using platform-specific commands. I should never place a private key, password, or passphrase in the repository.
 
@@ -135,4 +135,3 @@ I learned to distinguish SSH client and server settings, inspect authentication 
 ## 9. References
 
 - Local manual pages: `man ssh`, `man sshd`, `man sshd_config`, `man ssh-keygen`, and `man scp`.
-- My exercise specification and recorded terminal output.

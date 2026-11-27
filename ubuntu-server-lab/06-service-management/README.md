@@ -190,4 +190,3 @@ I learned to install and manage an application service, serve a separate static 
 ## 8. References
 
 - Local documentation: `man nginx`, `man systemctl`, `man journalctl`, `man ss`, and `man curl`.
-- My exercise specification and recorded terminal output.

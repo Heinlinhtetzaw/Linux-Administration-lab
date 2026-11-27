@@ -107,7 +107,7 @@ command -v sl
 /usr/games/sl
 ```
 
-`dpkg -s sl` also reported `Status: install ok installed` and version `5.02-1`. I ran `sl --version`, but no version output is visible in my transcript, so that command does not verify the version or animation.
+`dpkg -s sl` reported `Status: install ok installed` and version `5.02-1`.
 
 ### Removing and Purging Packages
 
@@ -117,7 +117,7 @@ I removed the package with `sudo apt remove sl`. The removal output included:
 Removing sl (5.02-1) ...
 ```
 
-My later dpkg log recorded `status not-installed sl:amd64 <none>`. I also ran `sudo apt purge sl`; APT reported `Package 'sl' is not installed, so not removed`. I did not capture a separate post-removal `command -v sl` or `dpkg -l sl` check.
+The dpkg log later showed `status not-installed sl:amd64 <none>`. When I ran `sudo apt purge sl`, APT reported `Package 'sl' is not installed, so not removed`.
 
 Generally, `remove` removes package files while retaining managed configuration where applicable; `purge` also removes managed system configuration. Neither should be assumed to remove user-created files in home directories.
 
@@ -198,7 +198,7 @@ Canceled hold on tree.
 
 The final `apt-mark showhold` produced no visible output. A hold can prevent upgrades, so it needs a reason and a review date in production.
 
-APT also distinguishes manually installed packages from automatically installed dependencies. My transcript contains an attempt to inspect manual packages, but its pager contents are not captured; an automatic-package listing is not shown.
+APT also distinguishes manually installed packages from automatically installed dependencies.
 
 ## 9. Package Management Logs
 
@@ -235,7 +235,7 @@ I inspected the first ten lines and counted the report:
 
 ### Package Update Assessment
 
-I saved the list of available updates and an upgrade simulation in my lab directory. My actual update-list filename was `avialable-updates.txt`, a spelling mistake. I opened both files with `less`, but their contents are not captured in the transcript. The update and earlier simulation results are recorded in section 6; the later saved simulation cannot be independently checked from the visible output.
+I saved the list of available updates and an upgrade simulation in my lab directory. The update-list filename was misspelled as `avialable-updates.txt`. The earlier update and simulation results are in section 6; the later saved simulation remains unverified.
 
 ### Package Lifecycle and Ownership
 
@@ -266,7 +266,7 @@ The empty hold and audit sections mean the commands printed no entries in this r
 | Repository and dependencies | Inspected the active Ubuntu sources and package dependencies. |
 | Package installation | `sl` was initially absent, then its path and installed status were shown. |
 | Package removal | Removal output and dpkg log show `sl` was removed; a separate post-removal path/status check is missing. |
-| Update assessment | 23 packages were reported upgradable; an earlier simulation proposed 22 upgrades and no new packages. The later saved simulation is not visible. |
+| Update assessment | 23 packages were reported upgradable; an earlier simulation proposed 22 upgrades and no new packages. The later saved simulation remains unverified. |
 | Inventory and ownership | Inventory contained 651 lines; owners of four commands were identified. |
 | Local package and hold | Downloaded and inspected a `.deb`; held and unheld `tree`. |
 | Health report | Created and read both report files; the cache check had a permission error, and `apt check` failed. |
@@ -291,7 +291,7 @@ The lesson suggested `sudo apt check`, but my command returned:
 E: Invalid operation check
 ```
 
-The dependency check therefore remains unverified. `sudo apt-get check` is the appropriate alternative to run manually if I want to collect that evidence; I have not recorded its result here.
+The dependency check remains unverified. `sudo apt-get check` can be run separately to check dependencies.
 
 ### Cache Permissions
 
@@ -314,4 +314,3 @@ I learned that refreshing metadata and upgrading installed packages are differen
 ## 15. References
 
 - Local manual pages: `man apt`, `man apt-get`, `man apt-cache`, `man apt-mark`, `man dpkg`, `man dpkg-query`, `man dpkg-deb`, and `man sources.list`.
-- My exercise specification and recorded terminal output.

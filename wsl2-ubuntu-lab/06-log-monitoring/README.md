@@ -103,7 +103,7 @@ Nov 26 08:59:10 heinhtet-sv su[1490]: pam_unix(su-l:auth): authentication failur
 Nov 26 08:59:11 heinhtet-sv su[1490]: FAILED SU (to labalice) heinlinhtetzaw on pts/2
 ```
 
-This records a failed local `su` attempt involving the lab account. The transcript does not establish the password entered or the reason authentication failed.
+This is a failed local `su` attempt involving the lab account. The cause of the failure is unknown.
 
 ### Login History Investigation
 
@@ -120,13 +120,13 @@ Nov 26 08:38:46 heinhtet-sv cron[209]: (CRON) INFO (pidfile fd = 3)
 Nov 26 08:38:46 heinhtet-sv cron[209]: (CRON) INFO (Running @reboot jobs)
 ```
 
-The broader history also showed hourly scheduled-task entries. The unset `EXTRA_OPTS` message appeared while cron was running; the captured output does not establish whether any configuration change is needed.
+The broader history also showed hourly scheduled-task entries. The unset `EXTRA_OPTS` message appeared while cron was running; whether it requires a configuration change remains unverified.
 
 ### Log Monitoring Report
 
 I grouped journal and service queries and redirected their output to `log-monitoring-report.txt`, with standard error going to `errors.txt`. I displayed both files. The report included journal disk usage, recent current-boot errors, sudo activity, cron logs, and the four custom messages. My simulated error appeared among real error-level entries because I submitted it with `user.err`.
 
-The report's error file printed no visible content. That does not establish that all logged system events were healthy; it only shows no visible standard-error output in that file.
+The report's error file was empty; this does not imply that all system events were healthy.
 
 ### Log Rotation
 
@@ -159,9 +159,8 @@ These are global settings in the displayed configuration; individual included ru
 - I mistyped `sudo` as `sudp` and `suod`. The shell reported the commands were not found; I corrected them before reading and following syslog.
 - `grep` reported that syslog matched as a binary file, so its displayed search output may omit matches. Further investigation of the file would be needed for a complete search.
 - I used `user.warning` instead of the requested `user.info` for `System monitoring test started`. The message was recorded, but the intended informational severity was not demonstrated.
-- The service status output warned that unit files or drop-ins for `systemd-journald`, `rsyslog`, and `cron` had changed on disk. The transcript does not establish what changed or whether a reload has since occurred. I did not perform a reload during this exercise.
+- Service status warned that unit files or drop-ins for `systemd-journald`, `rsyslog`, and `cron` had changed on disk. The changes and whether a reload occurred remain unverified; I did not reload them during this exercise.
 - The journal recorded `PAM unable to dlopen(pam_lastlog.so)` and `PAM adding faulty module`, along with the journal replacement warning and WSL/kernel messages. Their present impact and root causes remain unverified; they merit contextual investigation rather than an assumed fix.
-- My recorded commands do not show separate unfiltered `journalctl -b --no-pager` or `journalctl --since today --no-pager` system-wide queries. I did run current-boot priority filters and a today's filter for cron.
 
 
 ## 8. What I Learned
@@ -171,4 +170,3 @@ I learned to investigate both traditional log files and the systemd journal, fil
 ## 9. References
 
 - Local manual pages: `man journalctl`, `man logger`, `man rsyslog`, `man logrotate`, `man last`, and `man tail`.
-- My exercise specification and recorded terminal output.

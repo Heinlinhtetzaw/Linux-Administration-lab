@@ -158,7 +158,7 @@ I edited my crontab after the test. The final `crontab -l` showed these active e
 0 8 * * * /bin/bash "$HOME/linux-fundamentals-lab/scheduled-tasks-lab/system-monitor.sh" >> "$HOME/linux-fundamentals-lab/scheduled-tasks-lab/system-health.log" 2>&1
 ```
 
-The every-minute date entry was no longer present, and the monitoring job was configured for 8:00 AM daily. The transcript does not show a later 8:00 AM run, so I verified the daily configuration but not its execution. My existing backup entry remained.
+The every-minute date entry was removed, and the monitoring job was configured for 8:00 AM daily. Execution at that daily schedule remains unverified. My existing backup entry remained.
 
 ## 7. Verification Results
 
@@ -168,7 +168,7 @@ The every-minute date entry was no longer present, and the monitoring job was co
 | Date task | Timestamps and journal entries showed the corrected task running every minute. |
 | Monitoring script | Tested manually; multiple scheduled reports appeared after the path was corrected. |
 | Log investigation | Cron journal showed both commands; syslog search reported binary-file detection. |
-| Cleanup | Final crontab retained the existing backup job, removed the minute test, and configured the monitor for 8:00 AM daily. A daily run was not captured. |
+| Cleanup | Final crontab retained the backup job, removed the minute test, and configured the monitor for 8:00 AM daily. Daily execution remains unverified. |
 | Portfolio script | The tested script is reproduced above and copied to `wsl2-ubuntu-lab/scripts/system-monitor.sh`; the copy was verified against the original. |
 
 ## 8. Errors and Troubleshooting
@@ -177,7 +177,7 @@ The every-minute date entry was no longer present, and the monitoring job was co
 - My first date entry used `/user/bin/date` and an incorrect lab directory. The log recorded `/bin/sh: 1: /user/bin/date: not found`. I corrected the command and path; later timestamps and cron journal entries verified the working test. I also initially looked for `crontest.log`, while the recorded log was named `cron-text.log`.
 - My first monitoring entry pointed to `~/scheduled-tasks-lab/system-monitor.sh`, while the script was under `~/linux-fundamentals-lab/scheduled-tasks-lab/`. The log recorded `No such file or directory`. After correction, later reports appeared and the journal showed the corrected path.
 - `grep` identified `/var/log/syslog` as a binary file, so the displayed syslog matches may not be exhaustive. I used the journal and generated reports as additional evidence.
-- The cron status output warned that its unit file or related configuration had changed on disk. Cron was active, but the cause and whether a reload has since occurred were not established by this transcript.
+- Cron was active, but its status warned that the unit file or related configuration had changed on disk. The cause and whether a reload occurred remain unverified.
 
 ## 9. WSL2 Scheduling Limitations
 
@@ -190,4 +190,3 @@ I learned to inspect and preserve an existing crontab, understand the five sched
 ## 11. References
 
 - Local manual pages: `man cron`, `man crontab`, `man 5 crontab`, and `man bash`.
-- My exercise specification and recorded terminal output.

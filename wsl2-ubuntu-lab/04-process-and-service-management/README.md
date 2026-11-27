@@ -145,7 +145,7 @@ My subsequent `systemctl is-enabled cron` returned:
 enabled
 ```
 
-`active` describes the current runtime state, while `enabled` describes startup configuration. Cron was already enabled, so my transcript does not show me running `systemctl enable`. In WSL2, service enablement applies when the distribution starts with systemd; it does not itself start the distribution when Windows boots.
+`active` describes the current runtime state, while `enabled` describes startup configuration. Cron was already enabled. In WSL2, service enablement applies when the distribution starts with systemd; it does not itself start the distribution when Windows boots.
 
 ### Service Log Investigation
 
@@ -187,7 +187,7 @@ enabled
 0 loaded units listed.
 ```
 
-`cat process-management-lab/errors.txt` produced no visible output. An empty error file does not by itself prove every check succeeded, but the report contains the expected sections and results.
+`process-management-lab/errors.txt` was empty, and the report contained the expected sections and results. An empty error file alone does not prove every check succeeded.
 
 ## 6. Verification Results
 
@@ -216,7 +216,7 @@ enabled
   Nov 25 13:38:03 heinhtet-sv (cron)[3519]: cron.service: Referenced but unset environment variable evaluates to an empty string: EXTRA_OPTS
   ```
 
-  The service subsequently ran and was reported active. The transcript does not establish whether this unset optional variable needs a configuration change, so I have not assumed a cause or applied a fix.
+  The service subsequently ran and was reported active. Whether the unset optional variable requires a configuration change remains unverified.
 
 ## 8. What I Learned
 
@@ -225,4 +225,3 @@ I learned to identify processes and their parents, inspect resource usage, and m
 ## 9. References
 
 - Local documentation: `man ps`, `man top`, `man kill`, `man systemctl`, `man journalctl`, `help jobs`, `help bg`, and `help fg`.
-- My exercise specification and recorded terminal output.

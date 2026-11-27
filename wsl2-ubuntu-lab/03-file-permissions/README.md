@@ -156,7 +156,7 @@ sudo -u labvisitor ls permissions-lab/developers/
 ls: cannot open directory 'permissions-lab/developers/': Permission denied
 ```
 
-The denied listing is the expected result for this access test. I did not separately capture `id labvisitor` or a root access test, so those details remain unverified in my transcript.
+The denied listing is the expected result for this access test. Separate `id labvisitor` and root access checks remain unverified.
 
 ### Default Permissions Using umask
 
@@ -220,4 +220,3 @@ I learned to read owner, group, and other permissions, and to use numeric and sy
 ## 9. References
 
 - Local documentation: `man chmod`, `man chown`, `man chgrp`, `man stat`, and `help umask`.
-- My exercise specification and recorded terminal output.

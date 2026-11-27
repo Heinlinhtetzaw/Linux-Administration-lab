@@ -44,7 +44,7 @@ lo               UNKNOWN        127.0.0.1/8 10.255.255.254/32 ::1/128
 eth0             UP             172.30.245.70/20 fe80::215:5dff:feb3:ee8c/64
 ```
 
-My main interface was `eth0`, with IPv4 address `172.30.245.70/20`. Its recorded MAC address was `00:15:5d:b3:ee:8c`. `lo` is the loopback interface; its `UNKNOWN` operational state is not by itself evidence of a problem.
+My main interface was `eth0`, with IPv4 address `172.30.245.70/20`. Its MAC address is masked for privacy. `lo` is the loopback interface; its `UNKNOWN` operational state is not by itself evidence of a problem.
 
 ### IP Address and Routing Investigation
 
@@ -191,4 +191,3 @@ I learned to read interface and route information, distinguish DNS resolution fr
 ## 10. References
 
 - Local manual pages: `man ip`, `man ip-address`, `man ip-route`, `man ping`, `man ss`, `man curl`, `man getent`, and `man resolvectl`.
-- My exercise specification and recorded terminal output.

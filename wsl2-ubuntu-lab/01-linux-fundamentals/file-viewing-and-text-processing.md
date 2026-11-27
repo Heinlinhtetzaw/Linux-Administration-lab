@@ -499,7 +499,7 @@ Unlike `server.log`, `/var/log/auth.log` is a real system log. I treated its con
 
 ## 8. Practical Assessment and Verification
 
-I completed and captured evidence for the following tasks:
+I practiced the following tasks:
 
 - I created the `text-processing-lab` directory.
 - I created and verified a ten-line simulated server log.

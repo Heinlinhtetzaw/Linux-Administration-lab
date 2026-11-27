@@ -279,7 +279,7 @@ find . -type f -perm /111
 ./search-utilities-lab/scripts/backup.sh
 ```
 
-I attempted a world-writable-file search. My first command contained the typo `-tupe`; the later command was line-wrapped in the transcript and produced no displayed matches. I therefore did not record a confirmed world-writable-file result for this lab.
+I attempted a world-writable-file search. My first command contained the typo `-tupe`; a confirmed result remains unavailable.
 
 ### Combining Search Conditions
 
@@ -429,7 +429,7 @@ I attempted to exclude the backups directory, but I typed `bakcups` rather than 
 grep -rn --exclude-dir=bakcups "ERROR"
 ```
 
-Because the directory name was misspelled, the command did not exclude the intended directory. No matching `ERROR` entries were shown under backups in this transcript, but the option itself was not tested correctly.
+The misspelled directory name meant the command did not test the intended exclusion.
 
 ## 8. Command Discovery
 
@@ -667,7 +667,7 @@ The output file was empty because the intended simulated log directory was not s
 
 ### Security Permission Audit
 
-I searched the workspace for world-writable regular files. No matches were displayed in the transcript.
+I searched the workspace for world-writable regular files; no matches were displayed.
 
 I searched the root filesystem for SUID regular files and redirected errors into a separate file:
 

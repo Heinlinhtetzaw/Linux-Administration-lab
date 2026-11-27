@@ -204,7 +204,6 @@ I practiced using a script to combine several health checks into a report. I lea
 ## 8. References
 
 - Local manual pages: `man bash`, `man systemctl`, `man crontab`, `man 5 crontab`, `man journalctl`, and `man curl`.
-- My exercise specification and recorded terminal output.
 
 ---
 
@@ -398,7 +397,6 @@ I practiced checking a backup destination, validating inputs, reading exit codes
 ## 8. References
 
 - Local manual pages: `man bash`, `man tar`, `man sha256sum`, `man diff`, `man mktemp`, `man mountpoint`, and `man 5 crontab`.
-- My exercise specification and recorded terminal output.
 
 ---
 
@@ -630,4 +628,3 @@ I practiced combining administrator checks, argument validation, group membershi
 ## 8. References
 
 - Local manual pages: `man bash`, `man useradd`, `man passwd`, `man chage`, `man id`, `man getent`, and `man su`.
-- My exercise specification and recorded terminal output.

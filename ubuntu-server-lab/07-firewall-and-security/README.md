@@ -142,4 +142,3 @@ I learned to allow an SSH connection before enabling a firewall, inspect active 
 ## 8. References
 
 - Local manual pages: `man ufw`, `man sshd`, `man sshd_config`, `man systemctl`, `man journalctl`, and `man apt`.
-- My exercise specification and recorded terminal output.

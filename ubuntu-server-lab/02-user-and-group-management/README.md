@@ -130,7 +130,7 @@ uid=1009(labadmin) gid=1009(labadmin) groups=1009(labadmin),100(users)
 User labadmin is not allowed to run sudo on jane-sv.
 ```
 
-The account database and sudo policy check showed revocation. I had exited the earlier `labadmin` shell before removing membership; the transcript does not show a new `labadmin` login and direct sudo attempt afterward. Existing sessions can retain their previous group membership until restarted.
+The account database and sudo policy check showed revocation. I exited the earlier `labadmin` shell before removing membership; a fresh login and direct sudo test remain unverified. Existing sessions can retain their previous group membership until restarted.
 
 ### Administrative Log Investigation
 
@@ -148,7 +148,7 @@ I inspected recent sudo activity with `sudo journalctl -t sudo -n 15 --no-pager`
 | Role creation | `labadmin` and `labdev` were created and assigned their intended supplementary groups. |
 | Sudo access | `labadmin` ran `sudo whoami` successfully; `labdev` was denied. |
 | Shared directory | Mode `2770` and ownership were shown; the new file inherited `serverdevelopers`. |
-| Revocation | `id` and `sudo -l -U` showed `labadmin` no longer had sudo membership or authorization; a new direct login test was not recorded. |
+| Revocation | `id` and `sudo -l -U` showed `labadmin` no longer had sudo membership or authorization; a fresh direct login test remains unverified. |
 | Logging | The journal and authentication log recorded administrative activity. |
 
 ## 7. Errors and Troubleshooting
@@ -163,4 +163,3 @@ I learned to audit an administrator's privileges, assign separate roles, and ver
 ## 9. References
 
 - Local manual pages: `man sudo`, `man sudoers`, `man adduser`, `man usermod`, `man gpasswd`, `man chmod`, and `man journalctl`.
-- My exercise specification and recorded terminal output.

@@ -6,9 +6,9 @@ My objective was to investigate my Ubuntu Server's disks, filesystems, LVM confi
 
 ## 2. Lab Environment
 
-I worked on my Ubuntu Server virtual machine, `jane-sv`, using the `jane` account. My server runs in Oracle VirtualBox, and the exercise used my existing SSH administration setup. The storage layout and usage shown below are snapshots from the supplied terminal session.
+I worked on my Ubuntu Server virtual machine, `jane-sv`, using the `jane` account and SSH. The server runs in Oracle VirtualBox. Storage layout and usage figures are snapshots from the lab.
 
-I investigated existing storage rather than repartitioning or formatting a disk. The exercise notes describe earlier partitioning and mount setup, but the terminal output does not show those earlier operations.
+I investigated existing storage without repartitioning or formatting a disk during this session.
 
 ## 3. Storage Architecture
 
@@ -65,11 +65,11 @@ I inspected the physical volume, volume group, and logical volume with `sudo pvs
 
 ### Additional Virtual Disk Configuration
 
-The exercise notes describe previously configuring the 10 GiB additional disk and partitioning it with `fdisk`. My current `lsblk` and `fdisk -l` results verify that `/dev/sdb1` exists, but I forgot to captured the historical partitioning commands or my terminal output.
+The additional 10 GiB disk was partitioned earlier. `lsblk` and `fdisk -l` confirmed that `/dev/sdb1` exists; the partitioning commands were not retained.
 
 ### Ext4 Filesystem Creation
 
-The exercise notes describe earlier ext4 formatting with `mkfs.ext4`. My current `blkid` and mount checks show that `/dev/sdb1` contains an ext4 filesystem; they do not independently verify the earlier formatting command. I did not run `mkfs.ext4` in this verification session.
+`blkid` and the mount checks confirmed an ext4 filesystem on `/dev/sdb1`. Formatting was performed earlier; I did not run `mkfs.ext4` during this session.
 
 ### Persistent Mount Configuration
 
@@ -101,9 +101,23 @@ findmnt: /etc/fstab: parse error at line 12 -- ignored
 1 parse error, 0 errors, 0 warnings
 ```
 
-The current mount is verified, but the malformed configuration remains unresolved in the supplied output. It may affect the swap entry and future mount behavior; the transcript does not establish the swap state or a successful reboot with this configuration. I should review and correct the file before relying on it for startup. Reloading systemd did not repair the malformed line.
+At that point, the mount was active, but the parse error remained and persistence and swap had not been verified. Reloading systemd did not repair the malformed line. This is a historical troubleshooting record; the configuration issue was subsequently resolved.
 
-The exercise notes also describe earlier use of `mount -a` and persistent mount setup, but those earlier commands are not capture. `systemctl daemon-reload` is shown in the current session as described above.
+The original persistent mount setup was performed earlier. Reloading systemd did not correct the malformed entry.
+
+### Follow-up: Post-Reboot Verification
+
+After resolving the configuration issue, I verified the Ubuntu Server lab again after reboot. The exact correction commands and full warning text were not retained.
+
+| Check | Latest result |
+|---|---|
+| `fstab` validation | 0 parse errors, 0 errors, 1 warning concerning the regular swap file `/swap.img`. |
+| Uptime immediately after reboot | 0 minutes. |
+| Data mount | `/dev/sdb1` mounted at `/mnt/data` as ext4 with `rw,relatime` options. |
+| Capacity | 9.8 GiB total; 9.3 GiB available. |
+| Active swap | `/swap.img`, 2 GiB. |
+
+The data mount persisted after reboot and swap was active. The remaining swap-file warning is a non-blocking observation for this verification; its cause has not been determined. This verification applies to the Ubuntu Server lab; the independent capstone remains planned.
 
 ### Storage Read and Write Verification
 
@@ -154,15 +168,15 @@ sudo du -sh /mnt/data/
 | Disks and filesystems | Identified the 30 GiB primary disk, 10 GiB additional disk, partitions, ext4 filesystems, and mount points. |
 | LVM | Verified the root PV, VG, LV, and 14 GiB of free VG capacity. |
 | Current data mount | `/dev/sdb1` was mounted read/write at `/mnt/data`; the test file was written and read there. |
-| Persistent configuration | The data UUID matched, but `findmnt --verify` reported an unresolved parse error. Persistence across reboot and the swap entry remain unverified. |
+| Persistent configuration | In the follow-up, validation reported no parse errors and `/mnt/data` was mounted after reboot. One warning concerning `/swap.img` remained; swap was active. |
 | Capacity and inodes | Inspected filesystem usage, inode usage, and directory consumption. |
-| Historical setup | The exercise notes describe partitioning, formatting, and mount setup; those historical operations are not shown in the supplied terminal output. |
+| Historical setup | The partitioning, formatting, and initial mount setup were performed earlier; their commands were not retained. |
 
 ## 7. Errors and Troubleshooting
 
-The `/etc/fstab` parse error is the main unresolved issue. My output shows the swap line and an extra `/mnt/data` entry joined together, followed by a separate `/mnt/data` entry.
+The earlier `/etc/fstab` parse error showed the swap line and an extra `/mnt/data` entry joined together, followed by a separate `/mnt/data` entry.
 
-The initial systemd warning cleared after `systemctl daemon-reload`, but the parse error remained.
+The initial systemd warning cleared after `systemctl daemon-reload`, but the parse error remained at that time. The later follow-up reported zero parse errors and verified the mount after reboot. Active swap was verified; the separate swap-file warning is a non-blocking observation whose cause remains unknown.
 
 ## 8. What I Learned
 
@@ -171,4 +185,3 @@ I learned to distinguish a disk, partition, filesystem, and mount point, and to 
 ## 9. References
 
 - Local manual pages: `man lsblk`, `man fdisk`, `man blkid`, `man fstab`, `man mount`, `man lvm`, `man df`, and `man du`.
-- My exercise specification and recorded terminal output.

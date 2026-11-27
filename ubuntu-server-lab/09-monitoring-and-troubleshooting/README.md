@@ -301,4 +301,3 @@ I learned to look at load, CPU activity, available memory, storage, service stat
 ## 9. References
 
 - Local manual pages: `man uptime`, `man top`, `man vmstat`, `man free`, `man df`, `man systemctl`, `man journalctl`, `man ss`, and `man curl`.
-- My exercise specification and recorded terminal output.
