@@ -1,0 +1,41 @@
+# Sensitive information
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_rsa
+id_ed25519
+id_ecdsa
+id_dsa
+ubuntu_server_lab
+
+# Backup archives
+*.tar.gz
+*.tgz
+*.bak
+*.backup
+
+# Virtual machine and disk files
+*.iso
+*.vdi
+*.vmdk
+*.vhd
+*.vhdx
+*.sav
+
+# Runtime logs
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# Editor configurations
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
